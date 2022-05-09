@@ -11,14 +11,14 @@ import Products from '../componets/organisms/Products';
 /* Styled components */
 const SearchProductsContainer = styled.View`
     flex: 1;
-    padding: 0 16px 0 16px;
+    padding: 0 8px 0 8px;
 `;
 
 export default function SearchProducts() {
   return (
     <SearchProductsContainer>
-      <Text style={{ marginTop: 16, backgroundColor: 'pink', borderRadius: 100, padding: 12 }} >Buscar producto</Text>
-      <Text style={{ marginBottom: 16, marginTop: 16, color: 'white', textAlign: 'right' }} >Filtrar por categoria   v</Text>
+      <Text style={{ marginRight: 8, marginLeft: 8, marginTop: 16, backgroundColor: 'pink', borderRadius: 20, padding: 12, overflow: 'hidden' }} >Buscar producto</Text>
+      <Text style={{ marginRight: 8, marginLeft: 8, marginBottom: 16, marginTop: 16, color: 'white', textAlign: 'right' }} >Filtrar por categoria   v</Text>
       <Products/>
     </SearchProductsContainer>
   );
