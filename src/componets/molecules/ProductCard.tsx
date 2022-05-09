@@ -16,11 +16,11 @@ const ProductCardContainer = styled.View`
     border: 1px solid black;
 `;
 
-export default function ProductCard() {
+export default function ProductCard({ productData }) {
   return (
     <ProductCardContainer>
       <Text>Image</Text>
-      <Text>Details</Text>
+      <Text>{productData.description}</Text>
     </ProductCardContainer>
   );
 };

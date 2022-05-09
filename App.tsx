@@ -4,9 +4,13 @@ import React from 'react';
 /* Modules */
 import Constants from 'expo-constants';
 import styled from 'styled-components/native';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 /* Screens */
 import SearchProducts from './src/screens/SearchProducts';
+
+/* Init vars */
+const queryClient = new QueryClient();
 
 /* Styled components */
 const AppContainer = styled.View`
@@ -17,8 +21,10 @@ const AppContainer = styled.View`
 
 export default function App() {
   return (
-    <AppContainer>
-      <SearchProducts />
-    </AppContainer>
+    <QueryClientProvider client={queryClient}>
+      <AppContainer>
+        <SearchProducts />
+      </AppContainer>
+    </QueryClientProvider>
   );
 };
