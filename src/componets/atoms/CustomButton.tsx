@@ -8,7 +8,7 @@ import CustomText from './CustomText';
 import styled, { css } from 'styled-components/native';
 
 /* Styled components */
-const CustomButtonContainer = styled.TouchableOpacity<{ type?: String, borderRight?: Number, borderLeft?: Number }>`
+const CustomButtonContainer = styled.TouchableOpacity<{ type?: string, borderRight?: number, borderLeft?: number }>`
   flex: 1;
   background-color: pink;
   align-items: center;
@@ -21,7 +21,7 @@ const CustomButtonContainer = styled.TouchableOpacity<{ type?: String, borderRig
 `;
 
 
-export default function CustomButton({ type, text, borderRight, borderLeft }: { type?: String, text: String, borderRight?: Number, borderLeft?: Number }) {
+export default function CustomButton({ type, text, borderRight, borderLeft }: { type?: string, text: string, borderRight?: number, borderLeft?: number }) {
     return (
         <CustomButtonContainer
             type={type && type}
