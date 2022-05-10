@@ -14,9 +14,10 @@ import SearchProducts from './src/screens/SearchProducts';
 import ProductDetail from './src/screens/ProductDetail';
 
 /* Types */
+/* Defining root stack routes */
 type RootStackParamList = {
-  Home: undefined;
-  Details: undefined;
+  SearchProduct: undefined;
+  ProductDetails: undefined;
 };
 
 /* Init vars */
@@ -42,15 +43,16 @@ export default function App() {
     <NavigationContainer theme={MyTheme} >
       <QueryClientProvider client={queryClient}>
         <ExpoStatusBar style='light' />
+
         <AppContainer>
           <RootStack.Navigator
-            initialRouteName="Home"
+            initialRouteName="SearchProduct"
             screenOptions={{
               headerShown: false,
             }}
           >
-            <RootStack.Screen name="Home" component={SearchProducts} />
-            <RootStack.Screen name="Details" component={ProductDetail} />
+            <RootStack.Screen name="SearchProduct" component={SearchProducts} />
+            <RootStack.Screen name="ProductDetails" component={ProductDetail} />
           </RootStack.Navigator>
         </AppContainer>
       </QueryClientProvider>
