@@ -11,6 +11,7 @@ import Badge from '../atoms/Badge';
 
 /* Types */
 import { SearchProductType } from '../../screens/SearchProducts';
+
 type ProductDataI = {
   image: string,
   title: string,
@@ -59,6 +60,7 @@ export default function ProductCard({ productData, userName, navigation }
 
   return (
     <ProductCardContainer onPress={() => {
+      // @ts-ignore
       navigation.navigate('ProductDetails', { ...productData, userName: userName })
     }} >
       <ShadowProductCardContainer>

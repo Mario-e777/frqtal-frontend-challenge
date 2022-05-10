@@ -14,6 +14,7 @@ import { getAllUsers } from '../../services/users';
 
 /* Types */
 import { SearchProductType } from '../../screens/SearchProducts';
+import { ProductDataI } from '../molecules/ProductCard';
 
 export default function Products({ navigation }: { navigation: SearchProductType['navigation'] }) {
     /* Hooks */
@@ -21,7 +22,7 @@ export default function Products({ navigation }: { navigation: SearchProductType
     const UsersMutation = useQuery<any, Error>('get-all-users', getAllUsers);
 
     /* States */
-    const [productsToShow, setProductsToShow] = useState([]);
+    const [productsToShow, setProductsToShow] = useState<Array<ProductDataI>>([]);
     const [allUsers, setAllUsers] = useState<Array<{ username: string }>>([]);
 
     /* Effects */
@@ -47,6 +48,7 @@ export default function Products({ navigation }: { navigation: SearchProductType
                 userName={allUsers[Math.floor(Math.random() * allUsers.length)]?.username}
                 productData={item}
             />}
+            loading={ProductsMutation.isLoading}
         />
     );
 };
