@@ -5,19 +5,22 @@ import { Text, View } from 'react-native'
 /* Modules */
 import styled from 'styled-components/native';
 
+/* Components */
+import CustomText from '../atoms/customText';
+
 /* Styled components */
 const ProductCardContainer = styled.View`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  flex-direction: column;
-  padding: 0 8px 16px 8px;
-  
-  `;
+  padding: 0 8px 16px 8px;  
+`;
 
-const ImageContainer = styled.Image`
-border-radius: 4px;
+const ShadowProductCardContainer = styled.View`
+  border-radius: 5px;
+  border: 1px solid #8d63ff;
+  width: 100%;
+`;
+
+const ImageContainer = styled.Image<{ randomBool: Boolean }>`
+  border-radius: 4px;
   flex: 1;
   width: 100%;
   height: ${props => props.randomBool ? 220 : 300}px;
@@ -32,42 +35,40 @@ const ImageDataContainer = styled.View`
   padding: 10px;
   background: #8d63ffe9;
   overflow: hidden;
-  `;
+`;
 
-const ShadowDataContainer = styled.View`
-border-radius: 5px;
-  border: 1px solid #8d63ff;
+/* todo: convert to atom */
+const LikeButton = styled.Text`
+  position: absolute;
+  top: 12px;
+  right: 12px;
 `;
 
 export default function ProductCard({ productData }) {
+  /* Generating random bool to set image height */
   const rondomBool = useMemo(() => Math.random() < 0.5, []);
 
   return (
     <ProductCardContainer>
-      {/* <Text>{`${productData.rating.count}`}</Text> */}
-      <ShadowDataContainer style={{
-        width: '100%', shadowColor: '#8d63ffe9',
-        shadowOffset: { width: -2, height: 4 },
-        shadowOpacity: 0.2,
-        shadowRadius: 3
-      }} >
+      <ShadowProductCardContainer>
         <ImageContainer
           randomBool={rondomBool}
-          source={{
-            uri: productData.image,
-          }}
+          source={{ uri: productData.image }}
           resizeMode="cover"
         />
-        <Text style={{ position: 'absolute', top: 14, right: 14 }}>❤️</Text>
-        <ImageDataContainer >
-          <Text style={{ color: 'white', marginBottom: 0, fontWeight: 'bold' }} numberOfLines={1} >{`${productData.title}`}</Text>
-          <Text style={{ color: 'white', marginBottom: 8 }} >{`${productData.category}`}</Text>
+        <LikeButton>❤️</LikeButton>
+        <ImageDataContainer>
+          <CustomText bold white numOfLines={1} text={`${productData.title}`} />
+          <CustomText white marginBottom={8} text={`${productData.category}`} />
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }} >
-            <Text style={{ color: 'white' }} >{`${productData.price}`} <Text style={{ fontSize: 9 }}>FRQTAL</Text></Text>
-             <Text style={{ fontSize: 12, color: 'white' }}>{`${productData.rating.rate}`}   ❤️</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'flex-end' }} >
+              <CustomText white text={`${productData.price}`} />
+              <CustomText fontSize={10} white text={'  FRQTAL'} />
+            </View>
+            <CustomText fontSize={12} white text={`${productData.rating.rate}  ❤️`} />
           </View>
         </ImageDataContainer>
-      </ShadowDataContainer>
+      </ShadowProductCardContainer>
     </ProductCardContainer>
   );
 };

@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 
 /* Modules */
-import styled from 'styled-components/native';
 import { useQuery } from 'react-query';
 import MasonryList from '@react-native-seoul/masonry-list';
 
@@ -13,30 +12,28 @@ import ProductCard from '../molecules/ProductCard';
 import { getAllProducts } from '../../services/products';
 
 export default function Products() {
-    const [images, setImages] = useState([]);
-    const ProductsMutation: any = useQuery('get-all-products', getAllProducts);
+    /* Hooks */
+    const [productsToShow, setProductsToShow] = useState([]);
+    const ProductsMutation = useQuery('get-all-products', getAllProducts);
 
-    useEffect(() => {
-        ProductsMutation.data && setImages((prev) => ProductsMutation.data)
+    /* Effects */
+    useEffect(() => { /* Getting all products data */
+        ProductsMutation.data && setProductsToShow(() => ProductsMutation.data)
     }, [ProductsMutation.data]);
 
     return (
         <MasonryList
-            data={images}
-            keyExtractor={(item, index): string => index.toString()}
+            keyExtractor={item => `product-${item.id}`}
+            data={productsToShow}
             numColumns={2}
-            showsVerticalScrollIndicator={false}
+            showsVerticalScrollIndicator={true}
             renderItem={({ item }) => <ProductCard
                 productData={item}
             />}
             contentContainerStyle={{
-                
                 alignSelf: 'stretch',
             }}
-        /* refreshing={isLoadingNext}
-        onRefresh={() => refetch({ first: ITEM_CNT })}
-        onEndReachedThreshold={0.1}
-        onEndReached={() => loadNext(ITEM_CNT)} */
+            onRefresh={() => ProductsMutation.refetch()}
         />
     );
 

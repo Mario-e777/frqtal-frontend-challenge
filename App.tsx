@@ -23,7 +23,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AppContainer>
-        <SearchProducts />
+        <SearchProducts/>
       </AppContainer>
     </QueryClientProvider>
   );
