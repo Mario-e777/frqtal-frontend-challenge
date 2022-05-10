@@ -1,6 +1,6 @@
 /* React stuff */
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TextInput } from 'react-native';
 
 /* Modules */
 import { Collapse, CollapseHeader, CollapseBody } from "accordion-collapse-react-native";
@@ -22,7 +22,7 @@ export default function SearchProducts({ navigation }: SearchProductType) {
   return (
     <View style={styles.globalWrapper} >
 
-      <Text style={{ marginRight: 8, marginLeft: 8, marginTop: 16, backgroundColor: 'pink', borderRadius: 20, paddingTop: 12, paddingBottom: 12, paddingLeft: 20, paddingRight: 20, overflow: 'hidden' }} >Buscar producto</Text>
+      <TextInput placeholder='Buscar producto' style={{ marginRight: 8, marginLeft: 8, marginTop: 16, backgroundColor: '#f5f6f7', borderRadius: 100, paddingTop: 10, paddingBottom: 10, paddingLeft: 20, paddingRight: 20, overflow: 'hidden' }} />
       <Collapse>
         <CollapseHeader>
           <View style={{ alignItems: 'flex-end', marginRight: 8, marginLeft: 8, marginTop: 16 }} >
