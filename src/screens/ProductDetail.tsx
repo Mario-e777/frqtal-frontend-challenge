@@ -1,6 +1,6 @@
 /* React stuff */
 import React from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet, Image } from 'react-native';
 
 /* Modules */
 import styled from 'styled-components/native';
@@ -11,6 +11,9 @@ import CustomText from '../componets/atoms/CustomText';
 
 /* Styles */
 import styles from '../styles/global';
+
+/* Images */
+const BackButtonImage = require('../assets/images/back-arrow.png');
 
 /* Types */
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -38,6 +41,14 @@ const ProductImage = styled.Image`
   height: 540px;
 `;
 
+const BackButton = styled.TouchableOpacity`
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 28px;
+  height: 28px;
+`;
+
 const ProductDetailStyles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
@@ -45,7 +56,7 @@ const ProductDetailStyles = StyleSheet.create({
   }
 });
 
-export default function SearchProducts({ route }: { route: SearchProductType | any }) {
+export default function SearchProducts({ navigation, route }: SearchProductType | any ) {
   return (
     <ScrollView style={styles.globalWrapper} >
       <ImageViewContainer>
@@ -53,6 +64,9 @@ export default function SearchProducts({ route }: { route: SearchProductType | a
           source={{ uri: route.params.image, cache: 'only-if-cached' }}
           resizeMode='center'
         />
+        <BackButton onPress={() => navigation.navigate('SearchProduct')} >
+          <Image source={BackButtonImage} style={{ width: 22, height: 18 }} />
+        </BackButton>
         <Badge float text={`${route.params.rating.rate}  ❤️`} />
       </ImageViewContainer>
 
