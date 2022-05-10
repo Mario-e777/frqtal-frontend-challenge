@@ -1,6 +1,5 @@
 /* React stuff */
 import React from 'react';
-import { Text } from 'react-native';
 
 /* Modules */
 import styled from 'styled-components/native';

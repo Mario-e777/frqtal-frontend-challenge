@@ -12,7 +12,7 @@ import ProductCard from '../molecules/ProductCard';
 import { getAllProducts } from '../../services/products';
 import { getAllUsers } from '../../services/users';
 
-export default function Products() {
+export default function Products({ navigation }) {
     /* Hooks */
     const ProductsMutation = useQuery('get-all-products', getAllProducts);
     const UsersMutation = useQuery('get-all-users', getAllUsers);
@@ -37,6 +37,7 @@ export default function Products() {
             numColumns={2}
             showsVerticalScrollIndicator={true}
             renderItem={({ item }) => <ProductCard
+                navigation={navigation}
                 userName={allUsers[Math.floor(Math.random() * (allUsers.length))]?.username}
                 productData={item}
             />}

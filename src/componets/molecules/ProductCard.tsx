@@ -10,7 +10,7 @@ import CustomText from '../atoms/CustomText';
 import Badge from '../atoms/Badge';
 
 /* Styled components */
-const ProductCardContainer = styled.View`
+const ProductCardContainer = styled.TouchableOpacity`
   padding: 0 8px 16px 8px;  
 `;
 
@@ -38,24 +38,25 @@ const ImageDataContainer = styled.View`
   overflow: hidden;
 `;
 
-export default function ProductCard({ productData, userName }) {
+export default function ProductCard({ productData, userName, navigation }) {
   /* Generating random bool to set image height */
   const rondomBool = useMemo(() => Math.random() < 0.5, []);
 
   return (
-    <ProductCardContainer>
+    <ProductCardContainer onPress={() => navigation.navigate('Details')} >
       <ShadowProductCardContainer>
         <ImageContainer
           randomBool={rondomBool}
           source={{ uri: productData.image }}
           resizeMode="cover"
         />
-        <Badge text={<Text>@{userName}</Text>} />
+        <Badge text={`@${userName}`} />
         <ImageDataContainer>
           <CustomText bold white numOfLines={1} text={`${productData.title}`} />
           <CustomText white marginBottom={8} text={`${productData.category}`} />
+
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }} >
-            <View style={{ flexDirection: 'row', alignItems: 'flex-end' }} >
+            <View style={{ flexDirection: 'row', alignItems: 'center' }} >
               <CustomText white text={`${productData.price}`} />
               <CustomText fontSize={10} white text={'  FRQTAL'} />
             </View>
