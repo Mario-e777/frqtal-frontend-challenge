@@ -5,7 +5,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 /* Styled components */
-const CustomTextContainer = styled.Text<{ white: Boolean, bold: Boolean, fontSize: Number, marginBottom?: Number }>`
+const CustomTextContainer = styled.Text<{ white?: boolean, bold?: boolean, fontSize?: number, marginBottom?: number }>`
     color: ${props => props.white ? 'white' : 'black'};
     margin-bottom: ${props => props.marginBottom ? props.marginBottom : 0}px;
     font-size: ${props => props.fontSize ? props.fontSize : 14}px;
@@ -13,7 +13,7 @@ const CustomTextContainer = styled.Text<{ white: Boolean, bold: Boolean, fontSiz
 `;
 
 
-export default function CustomText({ fontSize, text, numOfLines, white, marginBottom, bold }: { fontSize?: Number, bold?: Boolean, text: String, numOfLines?: Number, white?: Boolean, marginBottom?: Number }) {
+export default function CustomText({ fontSize, text, numOfLines, white, marginBottom, bold }: { fontSize?: number, bold?: boolean, text: String, numOfLines?: number, white?: boolean, marginBottom?: number }) {
     return (
         <CustomTextContainer
             numberOfLines={numOfLines}

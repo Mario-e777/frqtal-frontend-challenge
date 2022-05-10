@@ -14,6 +14,7 @@ import SearchProducts from './src/screens/SearchProducts';
 import ProductDetail from './src/screens/ProductDetail';
 
 /* Types */
+/* Defining root stack routes */
 type RootStackParamList = {
   SearchProduct: undefined;
   ProductDetails: undefined;
@@ -42,6 +43,7 @@ export default function App() {
     <NavigationContainer theme={MyTheme} >
       <QueryClientProvider client={queryClient}>
         <ExpoStatusBar style='light' />
+
         <AppContainer>
           <RootStack.Navigator
             initialRouteName="SearchProduct"
