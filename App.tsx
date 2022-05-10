@@ -15,8 +15,8 @@ import ProductDetail from './src/screens/ProductDetail';
 
 /* Types */
 type RootStackParamList = {
-  Home: undefined;
-  Details: undefined;
+  SearchProduct: undefined;
+  ProductDetails: undefined;
 };
 
 /* Init vars */
@@ -44,13 +44,13 @@ export default function App() {
         <ExpoStatusBar style='light' />
         <AppContainer>
           <RootStack.Navigator
-            initialRouteName="Home"
+            initialRouteName="SearchProduct"
             screenOptions={{
               headerShown: false,
             }}
           >
-            <RootStack.Screen name="Home" component={SearchProducts} />
-            <RootStack.Screen name="Details" component={ProductDetail} />
+            <RootStack.Screen name="SearchProduct" component={SearchProducts} />
+            <RootStack.Screen name="ProductDetails" component={ProductDetail} />
           </RootStack.Navigator>
         </AppContainer>
       </QueryClientProvider>

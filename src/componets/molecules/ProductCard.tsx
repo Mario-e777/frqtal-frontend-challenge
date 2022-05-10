@@ -1,6 +1,6 @@
 /* React stuff */
 import React, { useMemo } from 'react';
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 
 /* Modules */
 import styled from 'styled-components/native';
@@ -53,14 +53,14 @@ export default function ProductCard({ productData, userName, navigation }: { pro
   const rondomBool = useMemo(() => Math.random() < 0.5, []);
 
   return (
-    <ProductCardContainer onPress={() => navigation.navigate('Details')} >
+    <ProductCardContainer onPress={() => navigation.navigate('ProductDetails', { ...productData, userName: userName })} >
       <ShadowProductCardContainer>
         <ImageContainer
           randomBool={rondomBool}
-          source={{ uri: productData.image }}
+          source={{ uri: productData.image, cache: 'only-if-cached' }}
           resizeMode="cover"
         />
-        <Badge text={`@${userName}`} />
+        <Badge float text={`@${userName}`} />
         <ImageDataContainer>
           <CustomText bold white numOfLines={1} text={`${productData.title}`} />
           <CustomText white marginBottom={8} text={`${productData.category}`} />
