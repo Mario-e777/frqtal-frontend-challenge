@@ -47,6 +47,7 @@ export default function Products({ navigation }: { navigation: SearchProductType
                 userName={allUsers[Math.floor(Math.random() * allUsers.length)]?.username}
                 productData={item}
             />}
+            loading={ProductsMutation.isLoading}
         />
     );
 };

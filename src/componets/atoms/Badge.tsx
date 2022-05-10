@@ -6,7 +6,7 @@ import { Text } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
 /* Styled components */
-const BadgeContainer = styled.View<{ float: Boolean, category: Boolean }>`
+const BadgeContainer = styled.View<{ float?: Boolean, category?: Boolean, margin?: Number }>`
   background-color: white;
   padding: 4px 8px;
   border-radius: 100px;
@@ -23,11 +23,16 @@ const BadgeContainer = styled.View<{ float: Boolean, category: Boolean }>`
     border: 1px solid #de0164;
     border-radius: 3px;
   `}
+  ${props => props.margin && css`margin: ${props.margin}px;`}
 `;
 
-export default function Badge({ text, float = false, category = false }: { text: String, float?: Boolean, category?: Boolean }) {
+export default function Badge({ text, float, category, margin }: { text: String, float?: Boolean, category?: Boolean, margin?: Number }) {
     return (
-        <BadgeContainer float={float && float} category={category && category} >
+        <BadgeContainer 
+          float={float && float} 
+          category={category && category} 
+          margin={margin && margin} 
+        >
             <Text style={{ fontSize: 12, marginBottom: 1, color: category && 'white' }} >{text}</Text>
         </BadgeContainer>
     );
