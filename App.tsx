@@ -5,7 +5,7 @@ import React from 'react';
 import Constants from 'expo-constants';
 import styled from 'styled-components/native';
 import { QueryClient, QueryClientProvider } from 'react-query';
-
+                  
 /* Screens */
 import SearchProducts from './src/screens/SearchProducts';
 

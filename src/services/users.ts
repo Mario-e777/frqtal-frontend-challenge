@@ -1,9 +1,9 @@
 import { API_PATH } from '@env';
 
-const getAllProducts = () => {
+const getAllUsers = () => {
     return new Promise((resolve, reject) => {
         fetch(
-            `${API_PATH}/products`,
+            `${API_PATH}/users`,
             {
                 method: 'GET',
                 headers: {
@@ -23,5 +23,5 @@ const getAllProducts = () => {
 };
 
 export {
-    getAllProducts
+    getAllUsers
 }

@@ -1,12 +1,13 @@
 /* React stuff */
 import React, { useMemo } from 'react';
-import { Text, View } from 'react-native'
+import { View, Text } from 'react-native'
 
 /* Modules */
 import styled from 'styled-components/native';
 
 /* Components */
-import CustomText from '../atoms/customText';
+import CustomText from '../atoms/CustomText';
+import Badge from '../atoms/Badge';
 
 /* Styled components */
 const ProductCardContainer = styled.View`
@@ -37,14 +38,7 @@ const ImageDataContainer = styled.View`
   overflow: hidden;
 `;
 
-/* todo: convert to atom */
-const LikeButton = styled.Text`
-  position: absolute;
-  top: 12px;
-  right: 12px;
-`;
-
-export default function ProductCard({ productData }) {
+export default function ProductCard({ productData, userName }) {
   /* Generating random bool to set image height */
   const rondomBool = useMemo(() => Math.random() < 0.5, []);
 
@@ -56,7 +50,7 @@ export default function ProductCard({ productData }) {
           source={{ uri: productData.image }}
           resizeMode="cover"
         />
-        <LikeButton>❤️</LikeButton>
+        <Badge text={<Text>@{userName}</Text>} />
         <ImageDataContainer>
           <CustomText bold white numOfLines={1} text={`${productData.title}`} />
           <CustomText white marginBottom={8} text={`${productData.category}`} />
