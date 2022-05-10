@@ -13,10 +13,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SearchProducts from './src/screens/SearchProducts';
 import ProductDetail from './src/screens/ProductDetail';
 
+/* Types */
+type RootStackParamList = {
+  Home: undefined;
+  Details: undefined;
+};
+
 /* Init vars */
 const queryClient = new QueryClient();
-const Stack = createNativeStackNavigator();
-
+const RootStack = createNativeStackNavigator<RootStackParamList>();
 const MyTheme = {
   ...DefaultTheme,
   colors: {
@@ -38,16 +43,19 @@ export default function App() {
       <QueryClientProvider client={queryClient}>
         <ExpoStatusBar style='light' />
         <AppContainer>
-          <Stack.Navigator 
-          initialRouteName="Home"
-          screenOptions={{
-            headerShown: false,
-          }} >
-            <Stack.Screen name="Home" component={SearchProducts} />
-            <Stack.Screen name="Details" component={ProductDetail} />
-          </Stack.Navigator>
+          <RootStack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            <RootStack.Screen name="Home" component={SearchProducts} />
+            <RootStack.Screen name="Details" component={ProductDetail} />
+          </RootStack.Navigator>
         </AppContainer>
       </QueryClientProvider>
     </NavigationContainer>
   );
 };
+
+export { RootStackParamList };

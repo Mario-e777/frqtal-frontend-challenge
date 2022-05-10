@@ -5,7 +5,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 /* Styled components */
-const CustomTextContainer = styled.Text<{ white: Boolean, marginBottom?: Number, bold: Boolean, fontSize: Number }>`
+const CustomTextContainer = styled.Text<{ white: Boolean, bold: Boolean, fontSize: Number, marginBottom?: Number }>`
     color: ${props => props.white ? 'white' : 'black'};
     margin-bottom: ${props => props.marginBottom ? props.marginBottom : 0}px;
     font-size: ${props => props.fontSize ? props.fontSize : 14}px;

@@ -9,6 +9,16 @@ import styled from 'styled-components/native';
 import CustomText from '../atoms/CustomText';
 import Badge from '../atoms/Badge';
 
+/* Types */
+import { SearchProductType } from '../../screens/SearchProducts';
+type ProductDataI = {
+  image: string,
+  title: string,
+  category: string,
+  price: string,
+  rating: { rate: string }
+}
+
 /* Styled components */
 const ProductCardContainer = styled.TouchableOpacity`
   padding: 0 8px 16px 8px;  
@@ -38,7 +48,7 @@ const ImageDataContainer = styled.View`
   overflow: hidden;
 `;
 
-export default function ProductCard({ productData, userName, navigation }) {
+export default function ProductCard({ productData, userName, navigation }: { productData: ProductDataI, userName: string, navigation: SearchProductType['navigation'] }) {
   /* Generating random bool to set image height */
   const rondomBool = useMemo(() => Math.random() < 0.5, []);
 
@@ -68,3 +78,4 @@ export default function ProductCard({ productData, userName, navigation }) {
   );
 };
 
+export { ProductDataI };

@@ -12,14 +12,17 @@ import ProductCard from '../molecules/ProductCard';
 import { getAllProducts } from '../../services/products';
 import { getAllUsers } from '../../services/users';
 
-export default function Products({ navigation }) {
+/* Types */
+import { SearchProductType } from '../../screens/SearchProducts';
+
+export default function Products({ navigation }: { navigation: SearchProductType['navigation'] }) {
     /* Hooks */
-    const ProductsMutation = useQuery('get-all-products', getAllProducts);
-    const UsersMutation = useQuery('get-all-users', getAllUsers);
+    const ProductsMutation = useQuery<any, Error>('get-all-products', getAllProducts);
+    const UsersMutation = useQuery<any, Error>('get-all-users', getAllUsers);
 
     /* States */
     const [productsToShow, setProductsToShow] = useState([]);
-    const [allUsers, setAllUsers] = useState([]);
+    const [allUsers, setAllUsers] = useState<Array<{ username: string }>>([]);
 
     /* Effects */
     useEffect(() => { /* Getting all products data */
@@ -36,17 +39,15 @@ export default function Products({ navigation }) {
             data={productsToShow}
             numColumns={2}
             showsVerticalScrollIndicator={true}
+            onRefresh={() => ProductsMutation.refetch()}
+            contentContainerStyle={{ alignSelf: 'stretch' }}
             renderItem={({ item }) => <ProductCard
                 navigation={navigation}
-                userName={allUsers[Math.floor(Math.random() * (allUsers.length))]?.username}
+                /* Setting rondom user name to each product card */
+                userName={allUsers[Math.floor(Math.random() * allUsers.length)]?.username}
                 productData={item}
             />}
-            contentContainerStyle={{
-                alignSelf: 'stretch',
-            }}
-            onRefresh={() => ProductsMutation.refetch()}
         />
     );
 
 };
-
