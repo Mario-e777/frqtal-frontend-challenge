@@ -11,7 +11,7 @@ import styles from '../styles/global';
 /* Types */
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
-type SearchProductType = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type SearchProductType = NativeStackScreenProps<RootStackParamList, 'SearchProduct'>;
 
 export default function SearchProducts({ navigation }: SearchProductType) {
   return (

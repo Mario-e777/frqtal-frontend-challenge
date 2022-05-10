@@ -49,5 +49,4 @@ export default function Products({ navigation }: { navigation: SearchProductType
             />}
         />
     );
-
 };
