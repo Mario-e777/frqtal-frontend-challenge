@@ -25,7 +25,7 @@ const BadgeContainer = styled.View<{ float: Boolean, category: Boolean }>`
   `}
 `;
 
-export default function CustomText({ text, float = false, category = false }: { text: String, float?: Boolean, category: Boolean }) {
+export default function Badge({ text, float = false, category = false }: { text: String, float?: Boolean, category?: Boolean }) {
     return (
         <BadgeContainer float={float && float} category={category && category} >
             <Text style={{ fontSize: 12, marginBottom: 1, color: category && 'white' }} >{text}</Text>
