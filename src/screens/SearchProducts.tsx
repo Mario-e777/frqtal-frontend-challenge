@@ -1,6 +1,6 @@
 /* React stuff */
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState }  from 'react';
+import { View, Text } from 'react-native';
 
 /* Components */
 import Products from '../componets/organisms/Products';
@@ -16,11 +16,16 @@ import FilterProducts from '../componets/organisms/FilterProduct';
 type SearchProductType = NativeStackScreenProps<RootStackParamList, 'SearchProduct'>;
 
 export default function SearchProducts({ navigation }: SearchProductType) {
+  const [state, setState] = useState({
+    filterText: '',
+    filterCategory: ''
+  });
+
   return (
     <View style={styles.globalWrapper} >
-      <FilterProducts/>
+      <FilterProducts parentState={{ state, setState }} />
       <View style={{ flex: 1, paddingTop: 16 }} >
-        <Products navigation={navigation} />
+        <Products filterByText={state.filterText} navigation={navigation} />
       </View>
     </View>
   );

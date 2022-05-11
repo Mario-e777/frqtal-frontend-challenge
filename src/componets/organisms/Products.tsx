@@ -16,7 +16,7 @@ import { getAllUsers } from '../../services/users';
 import { SearchProductType } from '../../screens/SearchProducts';
 import { ProductDataI } from '../molecules/ProductCard';
 
-export default function Products({ navigation }: { navigation: SearchProductType['navigation'] }) {
+export default function Products({ navigation, filterByText }: { navigation: SearchProductType['navigation'], filterByText: string }) {
     /* Hooks */
     const ProductsMutation = useQuery<any, Error>('get-all-products', getAllProducts);
     const UsersMutation = useQuery<any, Error>('get-all-users', getAllUsers);
@@ -42,12 +42,27 @@ export default function Products({ navigation }: { navigation: SearchProductType
             showsVerticalScrollIndicator={true}
             onRefresh={() => ProductsMutation.refetch()}
             contentContainerStyle={{ alignSelf: 'stretch' }}
-            renderItem={({ item }) => <ProductCard
-                navigation={navigation}
-                /* Setting rondom user name to each product card */
-                userName={allUsers[Math.floor(Math.random() * allUsers.length)]?.username}
-                productData={item}
-            />}
+            renderItem={({ item }) => {
+                if (filterByText !== '') {
+                    if (item.title.includes(filterByText)) {
+                        return <ProductCard
+                            key={`product-card-${item.id}`}
+                            navigation={navigation}
+                            /* Setting rondom user name to each product card */
+                            userName={allUsers[Math.floor(Math.random() * allUsers.length)]?.username}
+                            productData={item}
+                        />
+                    }
+                } else {
+                    return <ProductCard
+                        key={`product-card-${item.id}`}
+                        navigation={navigation}
+                        /* Setting rondom user name to each product card */
+                        userName={allUsers[Math.floor(Math.random() * allUsers.length)]?.username}
+                        productData={item}
+                    />
+                }
+            }}
             loading={ProductsMutation.isLoading}
         />
     );

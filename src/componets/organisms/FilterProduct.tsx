@@ -14,7 +14,7 @@ import Expander from '../molecules/Expander';
 /* Types */
 
 
-export default function FilterProducts() {
+export default function FilterProducts({ parentState }: { parentState: any }) {
     /* Hooks */
 
 
@@ -26,13 +26,13 @@ export default function FilterProducts() {
 
     return (
         <>
-            <CustomTextInput placeHolder='Buscar producto' />
+            <CustomTextInput parentState={parentState} placeHolder='Buscar producto por titulo' />
             <Expander items={[
                 <Badge key={'1a'} margin={7} category text={`electronics`} />,
                 <Badge key={'2a'} margin={7} category text={`jewelery`} />,
                 <Badge key={'3a'} margin={7} category text={`women's clothing`} />,
                 <Badge key={'4a'} margin={7} category text={`men's clothing`} />
-            ]} text={'Filtrar por   V'} />
+            ]} text={'Filtrar por categoria   V'} />
         </>
     );
 };
