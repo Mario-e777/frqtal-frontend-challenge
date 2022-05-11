@@ -82,7 +82,7 @@ export default function SearchProducts({ navigation }: SearchProductType) {
         />
       </View>
       <FloatingMenuContainer style={{ paddingBottom: 16, position: 'absolute', bottom: 0, right: 8, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }} >
-        <FloatingMenu onPress={() => navigation.navigate('CreateEditProduct')} >
+        <FloatingMenu onPress={() => navigation.navigate('CreateEditProduct', { fromScreen: 'SearchProduct' })} >
           <Text style={{ fontSize: 20, color: 'white' }} >+</Text>
         </FloatingMenu>
       </FloatingMenuContainer>

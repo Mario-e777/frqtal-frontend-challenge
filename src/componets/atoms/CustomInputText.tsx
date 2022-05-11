@@ -23,6 +23,7 @@ export default function CustomTextInput({ placeHolder, parentState, numeric, fie
             rounded={rounded}
             numberOfLines={numberOfLines}
             textAlignVertical={textArea ? 'top' : 'center'}
+            value={parentState.state[fieldToFill]}
         />
     );
 };

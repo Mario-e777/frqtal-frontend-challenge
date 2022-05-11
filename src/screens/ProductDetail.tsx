@@ -17,7 +17,7 @@ export default function SearchProducts({ navigation, route }: SearchProductType 
   return (
     <ScrollView style={styles.globalWrapper} >
       <ProductDetailImage navigation={navigation} route={route} />
-      <ProductDetailData route={route} />
+      <ProductDetailData navigation={navigation} route={route} />
     </ScrollView>
   );
 };

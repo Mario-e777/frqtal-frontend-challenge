@@ -20,14 +20,15 @@ const CustomButtonContainer = styled.TouchableOpacity<{ type?: string, borderRig
   ${props => props.borderLeft && css`margin-left: ${props.borderLeft}px;`}
 `;
 
-export default function CustomButton({ type, text, borderRight, borderLeft }: { type?: string, text: string, borderRight?: number, borderLeft?: number }) {
+export default function CustomButton({ onPressFunction, type, text, borderRight, borderLeft }: { onPressFunction?: Function, type?: string, text: string, borderRight?: number, borderLeft?: number }) {
     return (
         <CustomButtonContainer
             type={type && type}
             borderRight={borderRight && borderRight}
             borderLeft={borderLeft && borderLeft}
+            onPress={onPressFunction && (() => onPressFunction())}
         >
-            <CustomText white fontSize={18} bold text={text} />
+            <CustomText white fontSize={16} bold text={text} />
         </CustomButtonContainer>
     );
 };

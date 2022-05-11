@@ -14,6 +14,8 @@ import { RootStackParamList } from '../../../App';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import CustomButton from '../../componets/atoms/CustomButton';
 import SwitchBadge from '../../componets/atoms/SwitchBadge';
+import { deleteProduct } from '../../services/products';
+import { useMutation } from 'react-query';
 
 type SearchProductType = NativeStackScreenProps<RootStackParamList, 'ProductDetails'>;
 
@@ -28,7 +30,9 @@ const ProductDetailStyles = StyleSheet.create({
     }
 });
 
-export default function ProductDetailData({ route }: SearchProductType | any) {
+export default function ProductDetailData({ navigation, route }: SearchProductType | any) {
+    const DeleteProductMutation = useMutation(newItemData => deleteProduct(newItemData));
+
     return (
         <ProductDataContainer>
             <CustomText marginBottom={14} white fontSize={18} bold text={`${route.params.title}`} />
@@ -50,8 +54,8 @@ export default function ProductDetailData({ route }: SearchProductType | any) {
             </View>
 
             <View style={{ ...ProductDetailStyles.rowContainer, marginBottom: 18, justifyContent: 'space-between' }} >
-                <CustomButton borderRight={7} text='Eliminar' ></CustomButton>
-                <CustomButton borderLeft={7} text='Editar' ></CustomButton>
+                <CustomButton borderRight={7} text='Eliminar' onPressFunction={() => DeleteProductMutation.mutate(route.params.id)/* navigation.navigate('SearchProduct', {...route.params, urlImage: route.params.image, price: `${route.params.price}`, fromScreen: 'ProductDetails'}) */} ></CustomButton>
+                <CustomButton borderLeft={7} text='Editar' onPressFunction={() => navigation.navigate('CreateEditProduct', {...route.params, urlImage: route.params.image, price: `${route.params.price}`, fromScreen: 'ProductDetails'})} ></CustomButton>
             </View>
         </ProductDataContainer>
     );
