@@ -12,8 +12,8 @@ import Badge from '../atoms/Badge';
 const BackButtonImage = require('../../assets/images/back-arrow.png');
 
 /* Types */
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../App';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 type SearchProductType = NativeStackScreenProps<RootStackParamList, 'ProductDetails'>;
 
