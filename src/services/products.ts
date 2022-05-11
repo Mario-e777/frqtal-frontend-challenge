@@ -49,7 +49,6 @@ const deleteProduct = (itemId: any) => {
             `${API_PATH}/products/${itemId}`,
             { method: 'DELETE' }
         ).then(async response => {
-            console.log(response);
             const RESPONSE: any = await response.json();
             if (!RESPONSE.errors) {
                 resolve(RESPONSE);

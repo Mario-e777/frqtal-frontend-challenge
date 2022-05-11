@@ -83,8 +83,8 @@ export default function CreateEditProduct({ navigation, route }: SearchProductTy
                         </View>
                     </ScrollView>
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 16, marginTop: 8, justifyContent: 'space-between' }} >
-                        <CustomButton borderRight={7} text='Cancelar' onPressFunction={() => navigation.navigate(route.params.fromScreen, route.params)} ></CustomButton>
-                        <CustomButton borderLeft={7} text='Crear' onPressFunction={handleSubmit} ></CustomButton>
+                        <CustomButton pink borderRight={7} text='Cancelar' onPressFunction={() => navigation.navigate(route.params.fromScreen, route.params)} ></CustomButton>
+                        <CustomButton green borderLeft={7} text='Crear' onPressFunction={handleSubmit} ></CustomButton>
                     </View>
                 </View>
             )}

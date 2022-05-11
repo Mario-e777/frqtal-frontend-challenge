@@ -54,8 +54,8 @@ export default function ProductDetailData({ navigation, route }: SearchProductTy
             </View>
 
             <View style={{ ...ProductDetailStyles.rowContainer, marginBottom: 18, justifyContent: 'space-between' }} >
-                <CustomButton borderRight={7} text='Eliminar' onPressFunction={() => DeleteProductMutation.mutate(route.params.id)/* navigation.navigate('SearchProduct', {...route.params, urlImage: route.params.image, price: `${route.params.price}`, fromScreen: 'ProductDetails'}) */} ></CustomButton>
-                <CustomButton borderLeft={7} text='Editar' onPressFunction={() => navigation.navigate('CreateEditProduct', {...route.params, urlImage: route.params.image, price: `${route.params.price}`, fromScreen: 'ProductDetails'})} ></CustomButton>
+                <CustomButton pink borderRight={7} text='Eliminar' onPressFunction={() => DeleteProductMutation.mutate(route.params.id)/* navigation.navigate('SearchProduct', {...route.params, urlImage: route.params.image, price: `${route.params.price}`, fromScreen: 'ProductDetails'}) */} ></CustomButton>
+                <CustomButton purple borderLeft={7} text='Editar' onPressFunction={() => navigation.navigate('CreateEditProduct', {...route.params, urlImage: route.params.image, price: `${route.params.price}`, fromScreen: 'ProductDetails'})} ></CustomButton>
             </View>
         </ProductDataContainer>
     );
