@@ -32,20 +32,20 @@ export default function Products({ navigation, filterByText, productsToShow, Pro
     );
 
     const filterBy = ({ item }: { item: ProductDataI }) => {
-        if (filterByText !== '' && filterByCategory !== '') { /* Filter by text and category */
+        if (filterByText !== '' && (filterByCategory && filterByCategory !== '')) { /* Filter by text and category */
             if (item.title.includes(filterByText) && item.category.includes(filterByCategory)) {
-                return productCardHandler({ item })
+                return productCardHandler({ item });
             }
         } else if (filterByText !== '') { /* Filter by text */
             if (item.title.includes(filterByText)) {
-                return productCardHandler({ item })
+                return productCardHandler({ item });
             }
-        } else if (filterByCategory) { /* Filter by category */
+        } else if (filterByCategory && filterByCategory !== '') { /* Filter by category */
             if (item.category === filterByCategory) {
-                return productCardHandler({ item })
+                return productCardHandler({ item });
             }
-        } else if (filterByText === '' && !filterByCategory) { /* No filters */
-            return productCardHandler({ item })
+        } else { /* No filters */
+            return productCardHandler({ item });
         }
     };
 
