@@ -1,38 +1,53 @@
 /* React stuff */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 /* Modules */
-import { useQuery } from 'react-query';
 import MasonryList from '@react-native-seoul/masonry-list';
 
 /* Components */
-import ProductCard from '../molecules/ProductCard';
-
-/* Endpoints & utils */
-import { getAllProducts } from '../../services/products';
-import { getAllUsers } from '../../services/users';
+import ProductCard, { ProductDataI } from '../molecules/ProductCard';
 
 /* Types */
 import { SearchProductType } from '../../screens/SearchProducts';
-import { ProductDataI } from '../molecules/ProductCard';
 
-export default function Products({ navigation }: { navigation: SearchProductType['navigation'] }) {
-    /* Hooks */
-    const ProductsMutation = useQuery<any, Error>('get-all-products', getAllProducts);
-    const UsersMutation = useQuery<any, Error>('get-all-users', getAllUsers);
+export default function Products({ navigation, filterByText, productsToShow, ProductsMutation, allUsers, filterByCategory }
+    : {
+        navigation: SearchProductType['navigation'],
+        filterByText: string,
+        filterByCategory?: string | any;
+        allUsers: Array<{ username: string }>,
+        ProductsMutation?: any,
+        productsToShow?: Array<ProductDataI> | any
+    }) {
 
-    /* States */
-    const [productsToShow, setProductsToShow] = useState<Array<ProductDataI>>([]);
-    const [allUsers, setAllUsers] = useState<Array<{ username: string }>>([]);
+    /* Functions */
+    const productCardHandler = ({ item }: { item: ProductDataI }) => (
+        <ProductCard
+            key={`product-card-${item.id}`}
+            navigation={navigation}
+            /* Setting rondom user name to each product card */
+            userName={allUsers[Math.floor(Math.random() * allUsers.length)]?.username}
+            productData={item}
+        />
+    );
 
-    /* Effects */
-    useEffect(() => { /* Getting all products data */
-        ProductsMutation.data && setProductsToShow(() => ProductsMutation.data)
-    }, [ProductsMutation.data]);
-
-    useEffect(() => { /* Getting all users data */
-        UsersMutation.data && setAllUsers(() => UsersMutation.data)
-    }, [UsersMutation.data]);
+    const filterBy = ({ item }: { item: ProductDataI }) => {
+        if (filterByText !== '' && filterByCategory !== '') { /* Filter by text and category */
+            if (item.title.includes(filterByText) && item.category.includes(filterByCategory)) {
+                return productCardHandler({ item })
+            }
+        } else if (filterByText !== '') { /* Filter by text */
+            if (item.title.includes(filterByText)) {
+                return productCardHandler({ item })
+            }
+        } else if (filterByCategory) { /* Filter by category */
+            if (item.category === filterByCategory) {
+                return productCardHandler({ item })
+            }
+        } else if (filterByText === '' && !filterByCategory) { /* No filters */
+            return productCardHandler({ item })
+        }
+    };
 
     return (
         <MasonryList
@@ -41,13 +56,8 @@ export default function Products({ navigation }: { navigation: SearchProductType
             numColumns={2}
             showsVerticalScrollIndicator={true}
             onRefresh={() => ProductsMutation.refetch()}
-            contentContainerStyle={{ alignSelf: 'stretch' }}
-            renderItem={({ item }) => <ProductCard
-                navigation={navigation}
-                /* Setting rondom user name to each product card */
-                userName={allUsers[Math.floor(Math.random() * allUsers.length)]?.username}
-                productData={item}
-            />}
+            contentContainerStyle={{ alignSelf: 'stretch' }}//@ts-ignore
+            renderItem={({ item }) => filterBy({ item })}
             loading={ProductsMutation.isLoading}
         />
     );
