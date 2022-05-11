@@ -19,22 +19,15 @@ const BadgeContainer = styled.View<{ float?: boolean, category?: boolean, margin
     top: 12px;
     right: 12px;
   `}
-
-  ${props => props.category && css`
-    background-color: #de0164;
-    border: 1px solid #de0164;
-    border-radius: 3px;
-  `}
 `;
 
-export default function Badge({ text, float, category, margin }: { text: string, float?: boolean, category?: boolean, margin?: number }) {
+export default function Badge({ text, float, margin }: { text: string, float?: boolean, margin?: number }) {
     return (
         <BadgeContainer 
           float={float && float} 
-          category={category && category} 
           margin={margin && margin} 
         >
-            <Text style={{ fontSize: 12, marginBottom: 1, color: category ? '#fff' : '#000' }} >{text}</Text>
+            <Text style={{ fontSize: 12, marginBottom: 1 }} >{text}</Text>
         </BadgeContainer>
     );
 };

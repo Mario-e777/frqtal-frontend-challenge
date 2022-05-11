@@ -22,6 +22,29 @@ const getAllProducts = () => {
     });
 };
 
+const getAllCategories = () => {
+    return new Promise((resolve, reject) => {
+        fetch(
+            `${API_PATH}/products/categories`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            }
+        ).then(async response => {
+            const RESPONSE: any = await response.json();
+            if (!RESPONSE.errors) {
+                resolve(RESPONSE);
+            } else {
+                reject(RESPONSE);
+            }
+        })
+            .catch(error => console.error(error));
+    });
+};
+
 export {
-    getAllProducts
+    getAllProducts,
+    getAllCategories
 }
