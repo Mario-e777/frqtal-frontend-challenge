@@ -19,6 +19,7 @@ const BackButtonImage = require('../assets/images/back-arrow.png');
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
 import CustomButton from '../componets/atoms/CustomButton';
+import SwitchBadge from '../componets/atoms/SwitchBadge';
 type SearchProductType = NativeStackScreenProps<RootStackParamList, 'ProductDetails'>;
 
 /* Styles and styled components */
@@ -86,7 +87,7 @@ export default function SearchProducts({ navigation, route }: SearchProductType 
         <CustomText marginBottom={14} white fontSize={16} text={`${route.params.description}`} />
 
         <View style={{ ...ProductDetailStyles.rowContainer, marginBottom: 18 }} >
-          <Badge category text={`${route.params.category}`} />
+          <SwitchBadge text={`${route.params.category}`} />
         </View>
 
         <View style={{ ...ProductDetailStyles.rowContainer, marginBottom: 18, justifyContent: 'space-between' }} >
