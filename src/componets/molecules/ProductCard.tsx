@@ -13,6 +13,7 @@ import Badge from '../atoms/Badge';
 import { SearchProductType } from '../../screens/SearchProducts';
 
 type ProductDataI = {
+  id: string,
   image: string,
   title: string,
   category: string,

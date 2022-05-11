@@ -10,7 +10,45 @@ import ProductCard, { ProductDataI } from '../molecules/ProductCard';
 /* Types */
 import { SearchProductType } from '../../screens/SearchProducts';
 
-export default function Products({ navigation, filterByText, productsToShow, ProductsMutation, allUsers, filterByCategory }: { navigation: SearchProductType['navigation'], filterByText: string, filterByCategory?: string; allUsers?: Array<{ username: string }>, ProductsMutation?: any, productsToShow?: Array<ProductDataI> }) {
+export default function Products({ navigation, filterByText, productsToShow, ProductsMutation, allUsers, filterByCategory }
+    : {
+        navigation: SearchProductType['navigation'],
+        filterByText: string,
+        filterByCategory?: string | any;
+        allUsers: Array<{ username: string }>,
+        ProductsMutation?: any,
+        productsToShow?: Array<ProductDataI> | any
+    }) {
+
+    /* Functions */
+    const productCardHandler = ({ item }: { item: ProductDataI }) => (
+        <ProductCard
+            key={`product-card-${item.id}`}
+            navigation={navigation}
+            /* Setting rondom user name to each product card */
+            userName={allUsers[Math.floor(Math.random() * allUsers.length)]?.username}
+            productData={item}
+        />
+    );
+
+    const filterBy = ({ item }: { item: ProductDataI }) => {
+        if (filterByText !== '' && filterByCategory !== '') { /* Filter by text and category */
+            if (item.title.includes(filterByText) && item.category.includes(filterByCategory)) {
+                return productCardHandler({ item })
+            }
+        } else if (filterByText !== '') { /* Filter by text */
+            if (item.title.includes(filterByText)) {
+                return productCardHandler({ item })
+            }
+        } else if (filterByCategory) { /* Filter by category */
+            if (item.category === filterByCategory) {
+                return productCardHandler({ item })
+            }
+        } else if (filterByText === '' && !filterByCategory) { /* No filters */
+            return productCardHandler({ item })
+        }
+    };
+
     return (
         <MasonryList
             keyExtractor={item => `product-${item.id}`}
@@ -18,49 +56,8 @@ export default function Products({ navigation, filterByText, productsToShow, Pro
             numColumns={2}
             showsVerticalScrollIndicator={true}
             onRefresh={() => ProductsMutation.refetch()}
-            contentContainerStyle={{ alignSelf: 'stretch' }}
-            renderItem={({ item }) => {
-                if (filterByText !== '' && filterByCategory !== '') {
-                    if (item.title.includes(filterByText) && item.category.includes(filterByCategory)) {
-                        return <ProductCard
-                            key={`product-card-${item.id}`}
-                            navigation={navigation}
-                            /* Setting rondom user name to each product card */
-                            userName={allUsers[Math.floor(Math.random() * allUsers.length)]?.username}
-                            productData={item}
-                        />
-                    }
-                } else if (filterByText !== '') {
-                    if (item.title.includes(filterByText)) {
-                        return <ProductCard
-                            key={`product-card-${item.id}`}
-                            navigation={navigation}
-                            /* Setting rondom user name to each product card */
-                            userName={allUsers[Math.floor(Math.random() * allUsers.length)]?.username}
-                            productData={item}
-                        />
-                    }
-                } else if (filterByCategory) {
-                    if (item.category === filterByCategory) {
-                        return <ProductCard
-                            key={`product-card-${item.id}`}
-                            navigation={navigation}
-                            /* Setting rondom user name to each product card */
-                            userName={allUsers[Math.floor(Math.random() * allUsers.length)]?.username}
-                            productData={item}
-                        />
-                    }
-                } else if (filterByText === '' && !filterByCategory) {
-                    return <ProductCard
-                        key={`product-card-${item.id}`}
-                        navigation={navigation}
-                        /* Setting rondom user name to each product card */
-                        userName={allUsers[Math.floor(Math.random() * allUsers.length)]?.username}
-                        productData={item}
-                    />
-                }
-
-            }}
+            contentContainerStyle={{ alignSelf: 'stretch' }}//@ts-ignore
+            renderItem={({ item }) => filterBy({ item })}
             loading={ProductsMutation.isLoading}
         />
     );
