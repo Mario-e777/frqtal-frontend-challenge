@@ -6,8 +6,8 @@ import { ScrollView } from 'react-native';
 import styles from '../styles/global';
 
 /* Types */
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import ProductDetailImage from '../componets/molecules/ProductDetailImage';
 import ProductDetailData from '../componets/molecules/ProductDetailData';
 

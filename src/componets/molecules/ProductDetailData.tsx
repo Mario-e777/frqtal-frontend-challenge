@@ -10,8 +10,8 @@ import Badge from '../../componets/atoms/Badge';
 import CustomText from '../../componets/atoms/CustomText';
 
 /* Types */
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../App';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import CustomButton from '../../componets/atoms/CustomButton';
 import SwitchBadge from '../../componets/atoms/SwitchBadge';
 

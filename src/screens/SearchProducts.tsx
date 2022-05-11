@@ -14,8 +14,8 @@ import { getAllUsers } from '../services/users';
 import styles from '../styles/global';
 
 /* Types */
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import FilterProducts from '../componets/organisms/FilterProduct';
 import { ProductDataI } from '../componets/molecules/ProductCard';
 

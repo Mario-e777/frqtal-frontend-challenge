@@ -20,7 +20,6 @@ const CustomButtonContainer = styled.TouchableOpacity<{ type?: string, borderRig
   ${props => props.borderLeft && css`margin-left: ${props.borderLeft}px;`}
 `;
 
-
 export default function CustomButton({ type, text, borderRight, borderLeft }: { type?: string, text: string, borderRight?: number, borderLeft?: number }) {
     return (
         <CustomButtonContainer

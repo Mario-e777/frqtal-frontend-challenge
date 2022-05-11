@@ -13,7 +13,6 @@ const CustomTextContainer = styled.Text<{ white?: boolean, bold?: boolean, fontS
     font-weight: ${props => props.bold ? 'bold' : '400'};
 `;
 
-
 export default function CustomText({ fontSize, text, numOfLines, white, marginBottom, marginRight, bold }: { fontSize?: number, bold?: boolean, text: String, numOfLines?: number, white?: boolean, marginBottom?: number, marginRight?: number }) {
     return (
         <CustomTextContainer
