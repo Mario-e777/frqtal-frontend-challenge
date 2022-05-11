@@ -7,7 +7,7 @@ import { useQuery } from 'react-query';
 import Products from '../componets/organisms/Products';
 
 /* Endpoints & utils */
-import { getAllProducts, getAllCategories} from '../services/products';
+import { getAllProducts, getAllCategories } from '../services/products';
 import { getAllUsers } from '../services/users';
 
 /* Styles */
