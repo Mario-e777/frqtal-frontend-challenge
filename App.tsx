@@ -1,6 +1,5 @@
 /* React stuff */
 import React from 'react';
-import { Text, View } from 'react-native';
 
 /* Modules */
 import Constants from 'expo-constants';

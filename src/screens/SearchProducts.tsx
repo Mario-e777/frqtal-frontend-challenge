@@ -1,6 +1,6 @@
 /* React stuff */
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
 /* Components */
 import { useQuery } from 'react-query';
@@ -18,26 +18,10 @@ import { RootStackParamList } from '../../App';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import FilterProducts from '../componets/organisms/FilterProduct';
 import { ProductDataI } from '../componets/molecules/ProductCard';
-import styled from 'styled-components/native';
 import CustomText from '../componets/atoms/CustomText';
+import CustomFloatingMenu from '../componets/atoms/CustomFloatingMenu';
 
-type SearchProductType = NativeStackScreenProps<RootStackParamList, 'SearchProduct'>;
-
-/* Styled components */
-const FloatingMenu = styled.TouchableOpacity`
-  background-color: #de0165c9;
-  border: 1px solid #de0164;
-  height: 48px;
-  width: 48px;
-  border-radius: 100px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`;
-
-const FloatingMenuContainer = styled.View`
-  width: 100%;
-`;
+type SearchProductType = NativeStackScreenProps<RootStackParamList>;
 
 export default function SearchProducts({ navigation }: SearchProductType) {
   /* Data fetch hooks */
@@ -81,11 +65,7 @@ export default function SearchProducts({ navigation }: SearchProductType) {
           navigation={navigation}
         />
       </View>
-      <FloatingMenuContainer style={{ paddingBottom: 16, position: 'absolute', bottom: 0, right: 8, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }} >
-        <FloatingMenu onPress={() => navigation.navigate('CreateEditProduct', { fromScreen: 'SearchProduct' })} >
-          <Text style={{ fontSize: 20, color: 'white' }} >+</Text>
-        </FloatingMenu>
-      </FloatingMenuContainer>
+      <CustomFloatingMenu navigation={navigation} />
     </View>
   );
 };

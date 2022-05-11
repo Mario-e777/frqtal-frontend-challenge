@@ -13,7 +13,7 @@ import ProductDetailData from '../componets/molecules/ProductDetailData';
 
 type SearchProductType = NativeStackScreenProps<RootStackParamList, 'ProductDetails'>;
 
-export default function SearchProducts({ navigation, route }: SearchProductType | any ) {
+export default function SearchProducts({ navigation, route }: SearchProductType) {
   return (
     <ScrollView style={styles.globalWrapper} >
       <ProductDetailImage navigation={navigation} route={route} />

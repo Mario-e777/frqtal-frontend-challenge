@@ -23,7 +23,7 @@ import styles from '../styles/global';
 /* Types */
 import { RootStackParamList } from '../../App';
 
-type SearchProductType = NativeStackScreenProps<RootStackParamList, 'ProductDetails'>;
+type SearchProductType = NativeStackScreenProps<RootStackParamList>;
 
 /* Vars */
 /* Category switcher to controll category serected */
@@ -90,7 +90,7 @@ export default function CreateEditProduct({ navigation, route }: SearchProductTy
                         </View>
                         <View>
                             <CustomText marginLeft={8} marginTop={16} white text={'Descripcion'} />
-                            <CustomTextInput textArea multiline numberOfLines={8} fieldToFill={'description'} parentState={{ state, setState }} />
+                            <CustomTextInput multiline numberOfLines={8} fieldToFill={'description'} parentState={{ state, setState }} />
                         </View>
                         <View>
                             <CustomText marginLeft={8} marginTop={16} white text={'Categoria'} />
