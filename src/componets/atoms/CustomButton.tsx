@@ -13,7 +13,7 @@ const CustomButtonContainer = styled.TouchableOpacity<{ type?: string, borderRig
   background-color: pink;
   align-items: center;
   justify-content: center;
-  padding: 12px 0;
+  padding: 11px 0;
   border-radius: 100px;
 
   ${props => props.borderRight && css`margin-right: ${props.borderRight}px;`}

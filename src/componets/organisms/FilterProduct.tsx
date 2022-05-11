@@ -34,7 +34,7 @@ export default function FilterProducts({ parentState, categories }
 
     return (
         <>
-            <CustomTextInput parentState={parentState} placeHolder='Buscar producto por titulo' />
+            <CustomTextInput rounded fieldToFill={'filterText'} parentState={parentState} placeHolder='Buscar producto por titulo' />
             <Expander
                 parentState={{ state, setState }}
                 items={categories.map(category => <SwitchBadge categorySwitcher={categorySwitcher} parentState={{ state, setState }} switchable key={`${category}-key`} margin={7} text={category} />)}
