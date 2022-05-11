@@ -1,26 +1,27 @@
 /* React stuff */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
 /* Modules */
-import { useMutation, useQuery } from 'react-query';
 import { Formik } from 'formik';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useMutation, useQuery } from 'react-query';
 
 /* Components */
+import { AsyncAlert } from '../componets/atoms/CustomAlert';
+import CustomButton from '../componets/atoms/CustomButton';
+import CustomTextInput from '../componets/atoms/CustomInputText';
+import CustomText from '../componets/atoms/CustomText';
 import SwitchBadge from '../componets/atoms/SwitchBadge';
 
-/* Endpoints & utils */
-import { getAllCategories, createProduct, updateProduct } from '../services/products';
+/* Endpoints */
+import { createProduct, getAllCategories, updateProduct } from '../services/products';
 
 /* Styles */
 import styles from '../styles/global';
 
 /* Types */
 import { RootStackParamList } from '../../App';
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import CustomText from '../componets/atoms/CustomText';
-import CustomTextInput from '../componets/atoms/CustomInputText';
-import CustomButton from '../componets/atoms/CustomButton';
 
 type SearchProductType = NativeStackScreenProps<RootStackParamList, 'ProductDetails'>;
 
@@ -48,6 +49,22 @@ export default function CreateEditProduct({ navigation, route }: SearchProductTy
     useEffect(() => { /* Getting all categories data *///@ts-ignore
         CategoriesMutation.data && setCategories(() => CategoriesMutation.data)
     }, [CategoriesMutation.data]);
+
+    useEffect(() => { /* Showing success message */
+        /* New product message */
+        CreateProductMutation.isSuccess && AsyncAlert({
+            title: 'Producto creado',
+            message: 'Se ha creado el producto exitosamente',
+            buttonText: 'Continuar'
+        }).then(() => navigation.navigate(route.params.fromScreen === 'SearchProduct' ? 'SearchProduct' : 'ProductDetails', route.params && route.params));
+
+        /* Update message */
+        UpdateProductMutation.isSuccess && AsyncAlert({
+            title: 'Producto actualizado',
+            message: 'Se ha actualizado el producto exitosamente',
+            buttonText: 'Continuar'
+        }).then(() => navigation.navigate(route.params.fromScreen === 'SearchProduct' ? 'SearchProduct' : 'ProductDetails', route.params && route.params));
+    }, [CreateProductMutation.isSuccess, UpdateProductMutation.isSuccess]);
 
     return (
         <Formik
@@ -84,7 +101,7 @@ export default function CreateEditProduct({ navigation, route }: SearchProductTy
                     </ScrollView>
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 16, marginTop: 8, justifyContent: 'space-between' }} >
                         <CustomButton pink borderRight={7} text='Cancelar' onPressFunction={() => navigation.navigate(route.params.fromScreen, route.params)} ></CustomButton>
-                        <CustomButton green borderLeft={7} text='Crear' onPressFunction={handleSubmit} ></CustomButton>
+                        <CustomButton green borderLeft={7} text={route.params.fromScreen === 'SearchProduct' ? 'Crear' : 'Guardar'} onPressFunction={handleSubmit} ></CustomButton>
                     </View>
                 </View>
             )}

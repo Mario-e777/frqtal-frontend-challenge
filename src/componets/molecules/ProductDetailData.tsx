@@ -1,5 +1,5 @@
 /* React stuff */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 /* Modules */
@@ -16,6 +16,7 @@ import CustomButton from '../../componets/atoms/CustomButton';
 import SwitchBadge from '../../componets/atoms/SwitchBadge';
 import { deleteProduct } from '../../services/products';
 import { useMutation } from 'react-query';
+import { AsyncAlert } from '../atoms/CustomAlert';
 
 type SearchProductType = NativeStackScreenProps<RootStackParamList, 'ProductDetails'>;
 
@@ -32,6 +33,15 @@ const ProductDetailStyles = StyleSheet.create({
 
 export default function ProductDetailData({ navigation, route }: SearchProductType | any) {
     const DeleteProductMutation = useMutation(newItemData => deleteProduct(newItemData));
+
+    useEffect(() => { /* Showing success message */
+        /* Delete product message */
+        DeleteProductMutation.isSuccess && AsyncAlert({
+            title: 'Producto eliminado',
+            message: 'Se ha eliminado el producto exitosamente',
+            buttonText: 'Continuar'
+        }).then(() => navigation.navigate('SearchProduct'));
+    }, [DeleteProductMutation.isSuccess]);
 
     return (
         <ProductDataContainer>
@@ -55,7 +65,7 @@ export default function ProductDetailData({ navigation, route }: SearchProductTy
 
             <View style={{ ...ProductDetailStyles.rowContainer, marginBottom: 18, justifyContent: 'space-between' }} >
                 <CustomButton pink borderRight={7} text='Eliminar' onPressFunction={() => DeleteProductMutation.mutate(route.params.id)/* navigation.navigate('SearchProduct', {...route.params, urlImage: route.params.image, price: `${route.params.price}`, fromScreen: 'ProductDetails'}) */} ></CustomButton>
-                <CustomButton purple borderLeft={7} text='Editar' onPressFunction={() => navigation.navigate('CreateEditProduct', {...route.params, urlImage: route.params.image, price: `${route.params.price}`, fromScreen: 'ProductDetails'})} ></CustomButton>
+                <CustomButton purple borderLeft={7} text='Editar' onPressFunction={() => navigation.navigate('CreateEditProduct', { ...route.params, urlImage: route.params.image, price: `${route.params.price}`, fromScreen: 'ProductDetails' })} ></CustomButton>
             </View>
         </ProductDataContainer>
     );
