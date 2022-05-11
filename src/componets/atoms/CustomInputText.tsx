@@ -12,10 +12,10 @@ const CustomTextInputContainer = styled.TextInput`
   padding: 10px 20px;
 `;
 
-
-export default function CustomTextInput({ placeHolder }: { placeHolder?: string }) {
+export default function CustomTextInput({ placeHolder, parentState }: { placeHolder?: string, parentState?: any }) {
     return (
         <CustomTextInputContainer
+            onChangeText={filterText => parentState.setState({ ...parentState.state, filterText: filterText })}
             placeholder={placeHolder ? placeHolder : ''}
         />
     );
