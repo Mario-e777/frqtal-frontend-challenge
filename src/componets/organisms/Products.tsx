@@ -5,12 +5,12 @@ import React from 'react';
 import MasonryList from '@react-native-seoul/masonry-list';
 
 /* Components */
-import ProductCard from '../molecules/ProductCard';
+import ProductCard, { ProductDataI } from '../molecules/ProductCard';
 
 /* Types */
 import { SearchProductType } from '../../screens/SearchProducts';
 
-export default function Products({ navigation, filterByText, productsToShow, ProductsMutation, allUsers, filterByCategory }: { navigation: SearchProductType['navigation'], filterByText: string, filterByCategory?: string }) {
+export default function Products({ navigation, filterByText, productsToShow, ProductsMutation, allUsers, filterByCategory }: { navigation: SearchProductType['navigation'], filterByText: string, filterByCategory?: string; allUsers?: Array<{ username: string }>, ProductsMutation?: any, productsToShow?: Array<ProductDataI> }) {
     return (
         <MasonryList
             keyExtractor={item => `product-${item.id}`}
