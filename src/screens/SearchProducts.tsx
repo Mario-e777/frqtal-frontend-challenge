@@ -4,7 +4,7 @@ import { View } from 'react-native';
 
 /* Components */
 import { useQuery } from 'react-query';
-import Products from '../componets/organisms/Products';
+import ProductsList from '../components/organisms/ProductsList';
 
 /* Endpoints & utils */
 import { getAllProducts, getAllCategories } from '../services/products';
@@ -16,10 +16,10 @@ import styles from '../styles/global';
 /* Types */
 import { RootStackParamList } from '../../App';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import FilterProducts from '../componets/organisms/FilterProduct';
-import { ProductDataI } from '../componets/molecules/ProductCard';
-import CustomText from '../componets/atoms/CustomText';
-import CustomFloatingMenu from '../componets/atoms/CustomFloatingMenu';
+import FilterProducts from '../components/organisms/FilterProduct';
+import { ProductDataI } from '../components/molecules/ProductCard';
+import CustomText from '../components/atoms/CustomText';
+import CustomFloatingMenu from '../components/atoms/CustomFloatingMenu';
 
 type SearchProductType = NativeStackScreenProps<RootStackParamList>;
 
@@ -56,7 +56,7 @@ export default function SearchProducts({ navigation }: SearchProductType) {
       <CustomText marginLeft={8} marginTop={8} fontSize={16} white text={'Buscar producto'} />
       <FilterProducts categories={categories} parentState={{ state, setState }} />
       <View style={{ flex: 1, paddingTop: 16 }} >
-        <Products
+        <ProductsList
           allUsers={allUsers}
           ProductsMutation={ProductsMutation}
           productsToShow={productsToShow}

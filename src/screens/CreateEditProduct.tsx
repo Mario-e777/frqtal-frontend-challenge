@@ -8,11 +8,11 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useMutation, useQuery } from 'react-query';
 
 /* Components */
-import { AsyncAlert } from '../componets/atoms/CustomAlert';
-import CustomButton from '../componets/atoms/CustomButton';
-import CustomTextInput from '../componets/atoms/CustomInputText';
-import CustomText from '../componets/atoms/CustomText';
-import SwitchBadge from '../componets/atoms/SwitchBadge';
+import { AsyncAlert } from '../components/atoms/CustomAlert';
+import CustomButton from '../components/atoms/CustomButton';
+import CustomTextInput from '../components/atoms/CustomInputText';
+import CustomText from '../components/atoms/CustomText';
+import SwitchBadge from '../components/atoms/SwitchBadge';
 
 /* Endpoints */
 import { createProduct, getAllCategories, updateProduct } from '../services/products';
@@ -42,8 +42,36 @@ export default function CreateEditProduct({ navigation, route }: SearchProductTy
         price: '',
         urlImage: '',
         description: '',
-        category: ''
     });
+
+    /* Functions */
+    const handleCreateProduct = () => {
+        const { title, price, urlImage, description } = state;
+        
+        if (title && price && urlImage && description) {
+            CreateProductMutation.mutate(state)
+        } else {
+            AsyncAlert({
+                title: 'Ocurrio un error',
+                message: 'Para guardar, todos los campos deben ser llenados',
+                buttonText: 'Continuar'
+            })
+        }
+    };
+
+    const handleUpdateProduct = () => {
+        const { title, price, urlImage, description } = state;
+
+        if (title && price && urlImage && description) {
+            UpdateProductMutation.mutate(state)
+        } else {
+            AsyncAlert({
+                title: 'Ocurrio un error',
+                message: 'Para actualizar, todos los campos deben ser llenados',
+                buttonText: 'Continuar'
+            })
+        }
+    };
 
     /* Effects */
     useEffect(() => { /* Getting all categories data *///@ts-ignore
@@ -69,7 +97,7 @@ export default function CreateEditProduct({ navigation, route }: SearchProductTy
     return (
         <Formik
             initialValues={state}
-            onSubmit={() => route.params.fromScreen === 'SearchProduct' ? CreateProductMutation.mutate(state) : UpdateProductMutation.mutate(state)}
+            onSubmit={() => route.params.fromScreen === 'SearchProduct' ? handleCreateProduct() : handleUpdateProduct()}
         >
             {({ handleSubmit }) => (
                 <View style={{ ...styles.globalWrapper }} >

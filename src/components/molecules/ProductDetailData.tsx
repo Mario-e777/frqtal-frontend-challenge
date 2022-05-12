@@ -7,10 +7,10 @@ import styled from 'styled-components/native';
 import { useMutation } from 'react-query';
 
 /* Components */
-import Badge from '../../componets/atoms/Badge';
-import CustomText from '../../componets/atoms/CustomText';
-import CustomButton from '../../componets/atoms/CustomButton';
-import SwitchBadge from '../../componets/atoms/SwitchBadge';
+import Badge from '../atoms/Badge';
+import CustomText from '../atoms/CustomText';
+import CustomButton from '../atoms/CustomButton';
+import SwitchBadge from '../atoms/SwitchBadge';
 import { AsyncAlert } from '../atoms/CustomAlert';
 
 /* Services */
@@ -22,6 +22,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 type SearchProductType = NativeStackScreenProps<RootStackParamList>;
 
+/* Syled components */
 const ProductDataContainer = styled.View`
   margin: 0 8px 0 8px;
 `;
