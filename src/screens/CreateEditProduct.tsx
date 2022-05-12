@@ -105,8 +105,8 @@ export default function CreateEditProduct({ navigation, route }: SearchProductTy
                         <CustomText marginLeft={8} marginTop={8} fontSize={16} white text={'Nuevo producto'} />
 
                         <View>
-                            <CustomText marginLeft={8} marginTop={16} white text={'Titulo'} />
-                            <CustomTextInput fieldToFill={'title'} parentState={{ state, setState }} placeHolder='Titulo del producto' />
+                            <CustomText marginLeft={8} marginTop={16} white text={'Título'} />
+                            <CustomTextInput fieldToFill={'title'} parentState={{ state, setState }} placeHolder='Título del producto' />
                         </View>
                         <View>
                             <CustomText marginLeft={8} marginTop={16} white text={'Precio (FRQTAL)'} />
@@ -117,11 +117,11 @@ export default function CreateEditProduct({ navigation, route }: SearchProductTy
                             <CustomTextInput fieldToFill={'urlImage'} parentState={{ state, setState }} placeHolder='https://www.mysite.com/image.png' />
                         </View>
                         <View>
-                            <CustomText marginLeft={8} marginTop={16} white text={'Descripcion'} />
+                            <CustomText marginLeft={8} marginTop={16} white text={'Descripción'} />
                             <CustomTextInput multiline numberOfLines={8} fieldToFill={'description'} parentState={{ state, setState }} />
                         </View>
                         <View>
-                            <CustomText marginLeft={8} marginTop={16} white text={'Categoria'} />
+                            <CustomText marginLeft={8} marginTop={16} white text={'Categoría'} />
                             <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginTop: 8 }} >
                                 {categories.map(category => <SwitchBadge categorySwitcher={categorySwitcher} parentState={{ state, setState }} switchable key={`${category}-key`} margin={7} text={category} />)}
                             </View>
