@@ -1,4 +1,4 @@
-//@ts-ignore
+/* Environment variables *///@ts-ignore
 import { API_PATH } from '@env';
 
 const getAllUsers = () => {

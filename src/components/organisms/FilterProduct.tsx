@@ -7,7 +7,7 @@ import Expander from '../molecules/Expander';
 import SwitchBadge from '../atoms/SwitchBadge';
 
 /* Vars */
-/* Category switcher to controll category serected */
+/* Category switcher to controll category selected */
 let categorySwitcher = {};
 
 export default function FilterProducts({ parentState, categories }
@@ -34,11 +34,18 @@ export default function FilterProducts({ parentState, categories }
 
     return (
         <>
-            <CustomTextInput parentState={parentState} placeHolder='Buscar producto por titulo' />
+            <CustomTextInput rounded fieldToFill={'filterText'} parentState={parentState} placeHolder='Buscar producto por titulo' />
             <Expander
                 parentState={{ state, setState }}
-                items={categories.map(category => <SwitchBadge categorySwitcher={categorySwitcher} parentState={{ state, setState }} switchable key={`${category}-key`} margin={7} text={category} />)}
                 text={state.isCategoryFiltersOpen ? 'Limpar filtros' : 'Filtrar por categoria'}
+                items={categories.map(category => <SwitchBadge
+                    key={`${category}-key`}
+                    text={category}
+                    categorySwitcher={categorySwitcher}
+                    parentState={{ state, setState }}
+                    switchable
+                    margin={7}
+                />)}
             />
         </>
     );

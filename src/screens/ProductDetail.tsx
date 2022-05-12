@@ -6,18 +6,18 @@ import { ScrollView } from 'react-native';
 import styles from '../styles/global';
 
 /* Types */
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
-import ProductDetailImage from '../componets/molecules/ProductDetailImage';
-import ProductDetailData from '../componets/molecules/ProductDetailData';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import ProductDetailImage from '../components/molecules/ProductDetailImage';
+import ProductDetailData from '../components/molecules/ProductDetailData';
 
 type SearchProductType = NativeStackScreenProps<RootStackParamList, 'ProductDetails'>;
 
-export default function SearchProducts({ navigation, route }: SearchProductType | any ) {
+export default function SearchProducts({ navigation, route }: SearchProductType) {
   return (
     <ScrollView style={styles.globalWrapper} >
       <ProductDetailImage navigation={navigation} route={route} />
-      <ProductDetailData route={route} />
+      <ProductDetailData navigation={navigation} route={route} />
     </ScrollView>
   );
 };
