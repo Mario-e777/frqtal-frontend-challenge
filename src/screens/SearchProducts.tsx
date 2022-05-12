@@ -1,10 +1,10 @@
 /* React stuff */
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { useQuery } from 'react-query';
 
 /* Components */
-import Products from '../componets/organisms/Products';
+import { useQuery } from 'react-query';
+import ProductsList from '../components/organisms/ProductsList';
 
 /* Endpoints & utils */
 import { getAllProducts, getAllCategories } from '../services/products';
@@ -14,12 +14,14 @@ import { getAllUsers } from '../services/users';
 import styles from '../styles/global';
 
 /* Types */
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
-import FilterProducts from '../componets/organisms/FilterProduct';
-import { ProductDataI } from '../componets/molecules/ProductCard';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import FilterProducts from '../components/organisms/FilterProduct';
+import { ProductDataI } from '../components/molecules/ProductCard';
+import CustomText from '../components/atoms/CustomText';
+import CustomFloatingMenu from '../components/atoms/CustomFloatingMenu';
 
-type SearchProductType = NativeStackScreenProps<RootStackParamList, 'SearchProduct'>;
+type SearchProductType = NativeStackScreenProps<RootStackParamList>;
 
 export default function SearchProducts({ navigation }: SearchProductType) {
   /* Data fetch hooks */
@@ -33,12 +35,12 @@ export default function SearchProducts({ navigation }: SearchProductType) {
   const [categories, setCategories] = useState<Array<string>>([]);
   const [state, setState] = useState({
     filterText: '',
-    filterCategory: ''
+    filterCategory: '',
   });
 
   /* Effects */
   useEffect(() => { /* Getting all products data *///@ts-ignore
-      ProductsMutation.data && setProductsToShow(() => ProductsMutation.data)
+    ProductsMutation.data && setProductsToShow(() => ProductsMutation.data)
   }, [ProductsMutation.data]);
 
   useEffect(() => { /* Getting all categories data *///@ts-ignore
@@ -46,14 +48,15 @@ export default function SearchProducts({ navigation }: SearchProductType) {
   }, [CategoriesMutation.data]);
 
   useEffect(() => { /* Getting all users data *///@ts-ignore
-      UsersMutation.data && setAllUsers(() => UsersMutation.data)
+    UsersMutation.data && setAllUsers(() => UsersMutation.data)
   }, [UsersMutation.data]);
 
   return (
     <View style={styles.globalWrapper} >
+      <CustomText marginLeft={8} marginTop={8} fontSize={16} white text={'Buscar producto'} />
       <FilterProducts categories={categories} parentState={{ state, setState }} />
       <View style={{ flex: 1, paddingTop: 16 }} >
-        <Products 
+        <ProductsList
           allUsers={allUsers}
           ProductsMutation={ProductsMutation}
           productsToShow={productsToShow}
@@ -62,6 +65,7 @@ export default function SearchProducts({ navigation }: SearchProductType) {
           navigation={navigation}
         />
       </View>
+      <CustomFloatingMenu navigation={navigation} />
     </View>
   );
 };
