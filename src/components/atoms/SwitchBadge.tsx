@@ -5,8 +5,15 @@ import { Text } from 'react-native';
 /* Modules */
 import styled, { css } from 'styled-components/native';
 
+/* Types */
+type SwitchBadgeI = {
+  float?: boolean,
+  margin?: number,
+  switchable?: boolean
+}
+
 /* Styled components */
-const BadgeContainer = styled.TouchableOpacity<{ float?: boolean, margin?: number, switchable?: boolean }>`
+const BadgeContainer = styled.TouchableOpacity<SwitchBadgeI>`
   padding: 4px 8px;
   background-color: #de0164;
   border: 1px solid #de0164;
@@ -22,9 +29,22 @@ const BadgeContainer = styled.TouchableOpacity<{ float?: boolean, margin?: numbe
   `}
 `;
 
-export default function SwitchBadge({ text, float, margin, switchable, parentState, categorySwitcher }: {categorySwitcher?: any, parentState?: any, text: string, float?: boolean, margin?: number, switchable?: boolean }) {
+export default function SwitchBadge({
+  text,
+  float,
+  margin,
+  switchable,
+  parentState,
+  categorySwitcher
+}: {
+  categorySwitcher?: any,
+  parentState?: any,
+  text: string
+} & SwitchBadgeI) {
+  /* States */
   const [isActive, setIsActive] = useState(switchable && !switchable);
 
+  /* Effects */
   useEffect(() => {
     setIsActive((parentState && parentState.state.categorySelected) && parentState.state.categorySelected[text])
   })

@@ -1,22 +1,28 @@
 /* React stuff */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 /* Modules */
 import styled from 'styled-components/native';
+import { useMutation } from 'react-query';
 
 /* Components */
-import Badge from '../../componets/atoms/Badge';
-import CustomText from '../../componets/atoms/CustomText';
+import Badge from '../atoms/Badge';
+import CustomText from '../atoms/CustomText';
+import CustomButton from '../atoms/CustomButton';
+import SwitchBadge from '../atoms/SwitchBadge';
+import { AsyncAlert } from '../atoms/CustomAlert';
+
+/* Services */
+import { deleteProduct } from '../../services/products';
 
 /* Types */
 import { RootStackParamList } from '../../../App';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import CustomButton from '../../componets/atoms/CustomButton';
-import SwitchBadge from '../../componets/atoms/SwitchBadge';
 
-type SearchProductType = NativeStackScreenProps<RootStackParamList, 'ProductDetails'>;
+type SearchProductType = NativeStackScreenProps<RootStackParamList>;
 
+/* Syled components */
 const ProductDataContainer = styled.View`
   margin: 0 8px 0 8px;
 `;
@@ -28,7 +34,18 @@ const ProductDetailStyles = StyleSheet.create({
     }
 });
 
-export default function ProductDetailData({ route }: SearchProductType | any) {
+export default function ProductDetailData({ navigation, route }: SearchProductType | any) {
+    const DeleteProductMutation = useMutation(newItemData => deleteProduct(newItemData));
+
+    useEffect(() => { /* Showing success message */
+        /* Delete product message */
+        DeleteProductMutation.isSuccess && AsyncAlert({
+            title: 'Producto eliminado',
+            message: 'Se ha eliminado el producto exitosamente',
+            buttonText: 'Continuar'
+        }).then(() => navigation.navigate('SearchProduct'));
+    }, [DeleteProductMutation.isSuccess]);
+
     return (
         <ProductDataContainer>
             <CustomText marginBottom={14} white fontSize={18} bold text={`${route.params.title}`} />
@@ -50,8 +67,8 @@ export default function ProductDetailData({ route }: SearchProductType | any) {
             </View>
 
             <View style={{ ...ProductDetailStyles.rowContainer, marginBottom: 18, justifyContent: 'space-between' }} >
-                <CustomButton borderRight={7} text='Eliminar' ></CustomButton>
-                <CustomButton borderLeft={7} text='Editar' ></CustomButton>
+                <CustomButton pink borderRight={7} text='Eliminar' onPressFunction={() => DeleteProductMutation.mutate(route.params.id)} ></CustomButton>
+                <CustomButton purple borderLeft={7} text='Editar' onPressFunction={() => navigation.navigate('CreateEditProduct', { ...route.params, urlImage: route.params.image, price: `${route.params.price}`, fromScreen: 'ProductDetails' })} ></CustomButton>
             </View>
         </ProductDataContainer>
     );

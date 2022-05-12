@@ -12,12 +12,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 /* Screens */
 import SearchProducts from './src/screens/SearchProducts';
 import ProductDetail from './src/screens/ProductDetail';
+import CreateEditProduct from './src/screens/CreateEditProduct';
 
 /* Types */
 /* Defining root stack routes */
 type RootStackParamList = {
   SearchProduct: undefined;
   ProductDetails: undefined;
+  CreateEditProduct: undefined;
 };
 
 /* Init vars */
@@ -53,6 +55,7 @@ export default function App() {
           >
             <RootStack.Screen name="SearchProduct" component={SearchProducts} />
             <RootStack.Screen name="ProductDetails" component={ProductDetail} />
+            <RootStack.Screen name="CreateEditProduct" component={CreateEditProduct} />
           </RootStack.Navigator>
         </AppContainer>
       </QueryClientProvider>

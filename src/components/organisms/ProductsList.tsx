@@ -10,14 +10,14 @@ import ProductCard, { ProductDataI } from '../molecules/ProductCard';
 /* Types */
 import { SearchProductType } from '../../screens/SearchProducts';
 
-export default function Products({ navigation, filterByText, productsToShow, ProductsMutation, allUsers, filterByCategory }
+export default function ProductsList({ navigation, filterByText, productsToShow, ProductsMutation, allUsers, filterByCategory }
     : {
         navigation: SearchProductType['navigation'],
         filterByText: string,
-        filterByCategory?: string | any;
+        filterByCategory?: string;
         allUsers: Array<{ username: string }>,
         ProductsMutation?: any,
-        productsToShow?: Array<ProductDataI> | any
+        productsToShow: Array<ProductDataI>
     }) {
 
     /* Functions */
